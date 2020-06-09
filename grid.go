@@ -62,3 +62,7 @@ func (g *Grid) getRandomCell() *Cell {
 
 	return g.cells[row][col]
 }
+
+func (g *Grid) size() int {
+	return g.rows * g.columns
+}
