@@ -86,12 +86,21 @@ func (g *Grid) String() string {
 	for i := 0; i < g.rows; i++ {
 		str += fmt.Sprint("|")
 		for j := 0; j < g.columns; j++ {
-			str += fmt.Sprint("   |")
+			str += fmt.Sprint("   ")
+			if g.cells[i][j].isLinked(g.cells[i][j].e) {
+				str += fmt.Sprint(" ")
+			} else {
+				str += fmt.Sprint("|")
+			}
 		}
 		str += fmt.Sprintln()
 		str += fmt.Sprint("+")
 		for j := 0; j < g.columns; j++ {
-			str += fmt.Sprint("---+")
+			if g.cells[i][j].isLinked(g.cells[i][j].s) {
+				str += fmt.Sprint("   +")
+			} else {
+				str += fmt.Sprint("---+")
+			}
 		}
 		str += fmt.Sprintln()
 	}
