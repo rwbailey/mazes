@@ -3,14 +3,16 @@ package main
 import "fmt"
 
 func main() {
-	grid := newGrid(4, 3)
+	grid := newGrid(8, 8)
 
-	printVals := func(c *Cell) bool {
-		fmt.Printf("[%v,%v]\n", c.row, c.col)
-		return true
-	}
+	fmt.Println(grid)
 
-	grid.forEachCellDo(printVals)
+	// printVals := func(c *Cell) bool {
+	// 	fmt.Printf("[%v,%v]\n", c.row, c.col)
+	// 	return true
+	// }
+
+	// grid.forEachCellDo(printVals)
 
 	// r := grid.getRandomCell()
 	// fmt.Printf("[%v,%v]\n", r.row, r.col)

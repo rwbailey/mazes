@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
 	"time"
 )
@@ -73,4 +74,27 @@ func (g *Grid) forEachCellDo(f func(c *Cell) bool) {
 			f(g.cells[i][j])
 		}
 	}
+}
+
+func (g *Grid) String() string {
+	str := fmt.Sprint("+")
+	for j := 0; j < g.columns; j++ {
+		str += fmt.Sprint("---+")
+	}
+	str += fmt.Sprintln()
+
+	for i := 0; i < g.rows; i++ {
+		str += fmt.Sprint("|")
+		for j := 0; j < g.columns; j++ {
+			str += fmt.Sprint("   |")
+		}
+		str += fmt.Sprintln()
+		str += fmt.Sprint("+")
+		for j := 0; j < g.columns; j++ {
+			str += fmt.Sprint("---+")
+		}
+		str += fmt.Sprintln()
+	}
+
+	return str
 }
