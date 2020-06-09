@@ -66,3 +66,11 @@ func (g *Grid) getRandomCell() *Cell {
 func (g *Grid) size() int {
 	return g.rows * g.columns
 }
+
+func (g *Grid) forEachCellDo(f func(c *Cell) bool) {
+	for i := 0; i < g.rows; i++ {
+		for j := 0; j < g.columns; j++ {
+			f(g.cells[i][j])
+		}
+	}
+}
