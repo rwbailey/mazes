@@ -54,7 +54,7 @@ func (g *Grid) configureCells() {
 	}
 }
 
-// Return a randoom cell
+// Return a random cell
 func (g *Grid) getRandomCell() *Cell {
 	s := rand.NewSource(time.Now().UnixNano())
 	r := rand.New(s)
@@ -70,14 +70,14 @@ func (g *Grid) size() int {
 }
 
 // Pass each row to the function f()
-func (g *Grid) forEashRowDo(f func(r []*Cell) bool) {
+func (g *Grid) forEashRowDo(f func(r []*Cell)) {
 	for i := 0; i < g.rows; i++ {
 		f(g.cells[i])
 	}
 }
 
 // Pass each cell to the function f()
-func (g *Grid) forEachCellDo(f func(c *Cell) bool) {
+func (g *Grid) forEachCellDo(f func(c *Cell)) {
 	for i := 0; i < g.rows; i++ {
 		for j := 0; j < g.columns; j++ {
 			f(g.cells[i][j])

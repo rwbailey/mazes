@@ -6,7 +6,7 @@ import (
 )
 
 func binaryTree(g *Grid) {
-	g.forEachCellDo(func(c *Cell) bool {
+	g.forEachCellDo(func(c *Cell) {
 		neighbors := []*Cell{}
 		if c.n != nil {
 			neighbors = append(neighbors, c.n)
@@ -21,7 +21,5 @@ func binaryTree(g *Grid) {
 			rn := r.Intn(len(neighbors))
 			c.Link(neighbors[rn], true)
 		}
-
-		return true
 	})
 }
