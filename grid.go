@@ -69,6 +69,13 @@ func (g *Grid) size() int {
 	return g.rows * g.columns
 }
 
+// Pass each row to the function f()
+func (g *Grid) forEashRowDo(f func(r []*Cell) bool) {
+	for i := 0; i < g.rows; i++ {
+		f(g.cells[i])
+	}
+}
+
 // Pass each cell to the function f()
 func (g *Grid) forEachCellDo(f func(c *Cell) bool) {
 	for i := 0; i < g.rows; i++ {
