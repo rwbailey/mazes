@@ -13,18 +13,16 @@ type Grid struct {
 }
 
 func newGrid(r, c int) *Grid {
-
 	g := &Grid{
 		rows:    r,
 		columns: c,
 	}
-
 	g.prepareGrid()
 	g.configureCells()
-
 	return g
 }
 
+// Populate the cells in the grid
 func (g *Grid) prepareGrid() {
 	cells := [][]*Cell{}
 	for i := 0; i < g.rows; i++ {
@@ -36,6 +34,7 @@ func (g *Grid) prepareGrid() {
 	g.cells = cells
 }
 
+// Set the n,s,e, & w fields of each cell in the grid
 func (g *Grid) configureCells() {
 	for i := 0; i < g.rows; i++ {
 		for j := 0; j < g.columns; j++ {
@@ -55,6 +54,7 @@ func (g *Grid) configureCells() {
 	}
 }
 
+// Return a randoom cell
 func (g *Grid) getRandomCell() *Cell {
 	s := rand.NewSource(time.Now().UnixNano())
 	r := rand.New(s)
@@ -64,10 +64,12 @@ func (g *Grid) getRandomCell() *Cell {
 	return g.cells[row][col]
 }
 
+// Return the number of cells in the grid
 func (g *Grid) size() int {
 	return g.rows * g.columns
 }
 
+// Pass each cell to the function f()
 func (g *Grid) forEachCellDo(f func(c *Cell) bool) {
 	for i := 0; i < g.rows; i++ {
 		for j := 0; j < g.columns; j++ {
@@ -76,6 +78,7 @@ func (g *Grid) forEachCellDo(f func(c *Cell) bool) {
 	}
 }
 
+// Custom format for printing the grid
 func (g *Grid) String() string {
 	str := fmt.Sprint("+")
 	for j := 0; j < g.columns; j++ {
@@ -104,6 +107,5 @@ func (g *Grid) String() string {
 		}
 		str += fmt.Sprintln()
 	}
-
 	return str
 }
