@@ -5,7 +5,7 @@ import "fmt"
 func main() {
 	grid := newGrid(8, 8)
 
-	binaryTree(grid)
+	sidewinder(grid)
 	fmt.Println(grid)
 
 	// grid.cells[0][0].Link(grid.cells[0][1], true)

@@ -70,7 +70,7 @@ func (g *Grid) size() int {
 }
 
 // Pass each row to the function f()
-func (g *Grid) forEashRowDo(f func(r []*Cell)) {
+func (g *Grid) forEachRowDo(f func(r []*Cell)) {
 	for i := 0; i < g.rows; i++ {
 		f(g.cells[i])
 	}
