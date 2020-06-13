@@ -2,7 +2,11 @@ package main
 
 import (
 	"fmt"
+	"image"
+	"image/color"
+	"image/png"
 	"math/rand"
+	"os"
 	"time"
 )
 
@@ -115,4 +119,56 @@ func (g *Grid) String() string {
 		str += fmt.Sprintln()
 	}
 	return str
+}
+
+func (g *Grid) toPNG() {
+
+	cellSize := 20
+
+	width := g.columns*cellSize + 1
+	height := g.rows*cellSize + 1
+
+	origin := image.Point{0, 0}
+	end := image.Point{width, height}
+
+	img := image.NewRGBA(image.Rectangle{origin, end})
+
+	// background := color.White
+	wall := color.Black
+
+	g.forEachCellDo(func(c *Cell) {
+		x1 := c.col * cellSize
+		y1 := c.row * cellSize
+		x2 := (c.col + 1) * cellSize
+		y2 := (c.row + 1) * cellSize
+
+		if c.n == nil {
+			for i := x1; i <= x2; i++ {
+				img.Set(i, y1, wall)
+			}
+		}
+		if c.w == nil {
+			for j := y1; j <= y2; j++ {
+				img.Set(x1, j, wall)
+			}
+		}
+
+		if !c.isLinked(c.s) {
+			for i := x1; i <= x2; i++ {
+				img.Set(i, y2, wall)
+			}
+		}
+		if !c.isLinked(c.e) {
+			for j := y1; j <= y2; j++ {
+				img.Set(x2, j, wall)
+			}
+		}
+	})
+
+	f, err := os.Create("draw.png")
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
+	png.Encode(f, img)
 }
