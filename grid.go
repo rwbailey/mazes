@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"image"
 	"image/color"
+	"image/draw"
 	"image/png"
 	"math/rand"
 	"os"
@@ -89,7 +90,7 @@ func (g *Grid) forEachCellDo(f func(c *Cell)) {
 	}
 }
 
-// Custom format for printing the grid
+// Custom format for printing the grid to string
 func (g *Grid) String() string {
 	str := fmt.Sprint("+")
 	for j := 0; j < g.columns; j++ {
@@ -121,9 +122,8 @@ func (g *Grid) String() string {
 	return str
 }
 
-func (g *Grid) toPNG() {
-
-	cellSize := 20
+// Print the grid to a png
+func (g *Grid) toPNG(cellSize int, trans bool) {
 
 	width := g.columns*cellSize + 1
 	height := g.rows*cellSize + 1
@@ -131,10 +131,13 @@ func (g *Grid) toPNG() {
 	origin := image.Point{0, 0}
 	end := image.Point{width, height}
 
-	img := image.NewRGBA(image.Rectangle{origin, end})
-
-	// background := color.White
+	background := color.White
 	wall := color.Black
+
+	img := image.NewRGBA(image.Rectangle{origin, end})
+	if !trans {
+		draw.Draw(img, img.Bounds(), &image.Uniform{background}, image.ZP, draw.Src)
+	}
 
 	g.forEachCellDo(func(c *Cell) {
 		x1 := c.col * cellSize

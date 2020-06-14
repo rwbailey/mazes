@@ -3,14 +3,12 @@ package main
 import "fmt"
 
 func main() {
-	grid := newGrid(10, 10)
+	grid := newGrid(20, 20)
 
 	sidewinder(grid)
 
 	fmt.Println(grid)
-	fmt.Println(grid.cells[9][9].isLinked(grid.cells[9][9].e))
-
-	grid.toPNG()
+	grid.toPNG(20, true)
 
 	// grid.cells[0][0].Link(grid.cells[0][1], true)
 	// grid.cells[0][1].Link(grid.cells[1][1], true)
